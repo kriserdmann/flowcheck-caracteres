@@ -339,6 +339,7 @@ export const processFilesMap = (filesMap) => {
     versoes = filteredVersoes;
     
     const finalVersoes = [];
+    let consecutiveSaves = 0;
     
     for (let i = 0; i < versoes.length; i++) {
         const v = versoes[i];
@@ -372,6 +373,13 @@ export const processFilesMap = (filesMap) => {
                 continue;
             }
             
+            if (remocoes === 0 && adicoes > 0) {
+                consecutiveSaves++;
+            } else if (remocoes > 0) {
+                consecutiveSaves = 0;
+            }
+            v.consecutiveSaves = consecutiveSaves;
+            
             const tempo_segundos = (v.data.getTime() - lastKept.data.getTime()) / 1000;
             v.cps = tempo_segundos > 0 ? (adicoes / tempo_segundos) : 0;
         } else {
@@ -379,6 +387,8 @@ export const processFilesMap = (filesMap) => {
             v.adicoes = 0;
             v.remocoes = 0;
             v.cps = 0;
+            consecutiveSaves = 1;
+            v.consecutiveSaves = 1;
         }
 
         finalVersoes.push(v);

@@ -165,15 +165,24 @@ export function Dashboard({ data, onReset }) {
                   onClick={() => handleSelectVersion(v)}
                   style={getBorderStyle(v)}
                 >
-                  <div className="version-meta">
-                    <span style={{fontWeight: 600, color: 'var(--primary)', wordBreak: 'break-all'}}>{v.nome_arquivo}</span>
-                  </div>
-                  <div className="version-meta">
-                    <span className="version-time">{new Date(v.data).toLocaleTimeString()}</span>
-                    <div style={{ display: 'flex', gap: '8px' }}>
-                      <span className="add">{(v.cps || 0).toFixed(2)} c/s</span>
-                      <span className="add">+{v.adicoes} caracteres</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ flex: 1 }}>
+                      <div className="version-meta">
+                        <span style={{fontWeight: 600, color: 'var(--primary)', wordBreak: 'break-all'}}>{v.nome_arquivo}</span>
+                      </div>
+                      <div className="version-meta">
+                        <span className="version-time">{new Date(v.data).toLocaleTimeString()}</span>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <span className="add">{(v.cps || 0).toFixed(2)} c/s</span>
+                          <span className="add">+{v.adicoes} caracteres</span>
+                        </div>
+                      </div>
                     </div>
+                    {v.consecutiveSaves > 0 && (
+                      <div title="Saves consecutivos sem exclusão" style={{ background: 'rgba(255,255,255,0.05)', padding: '2px 6px', borderRadius: '4px', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px', border: '1px solid var(--border)', marginLeft: '8px', color: 'var(--text-main)' }}>
+                        🔥 {v.consecutiveSaves}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -193,18 +202,27 @@ export function Dashboard({ data, onReset }) {
                   onClick={() => handleSelectVersion(v)}
                   style={getBorderStyle(v)}
                 >
-                  <div className="version-meta">
-                    <span className="version-time">{new Date(v.data).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'})} ({new Date(v.data).toLocaleDateString()})</span>
-                  </div>
-                  {v.diff_content ? (
-                    <div className="stats">
-                      <span className="add">{(v.cps || 0).toFixed(2)} c/s</span>
-                      <span className="add">+{v.adicoes}</span>
-                      <span className="rem">-{v.remocoes}</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ flex: 1 }}>
+                      <div className="version-meta">
+                        <span className="version-time">{new Date(v.data).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'})} ({new Date(v.data).toLocaleDateString()})</span>
+                      </div>
+                      {v.diff_content ? (
+                        <div className="stats">
+                          <span className="add">{(v.cps || 0).toFixed(2)} c/s</span>
+                          <span className="add">+{v.adicoes}</span>
+                          <span className="rem">-{v.remocoes}</span>
+                        </div>
+                      ) : (
+                        <div className="stats"><span style={{color: 'var(--text-muted)'}}>Criação Original</span></div>
+                      )}
                     </div>
-                  ) : (
-                    <div className="stats"><span style={{color: 'var(--text-muted)'}}>Criação Original</span></div>
-                  )}
+                    {v.consecutiveSaves > 0 && (
+                      <div title="Saves consecutivos sem exclusão" style={{ background: 'rgba(255,255,255,0.05)', padding: '2px 6px', borderRadius: '4px', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px', border: '1px solid var(--border)', marginLeft: '8px', color: 'var(--text-main)' }}>
+                        🔥 {v.consecutiveSaves}
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

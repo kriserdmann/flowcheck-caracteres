@@ -697,15 +697,20 @@ export function generateDashboardHTML(data, meta) {
         const timeStr = new Date(v.data).toLocaleTimeString();
         sidebarHtml += \`
           <div class="version-item top-item \${activeId === v.id ? 'active' : ''}" onclick="window.selectVersion('\${v.id}')" id="sb-\${v.id}" style="\${getBorderStyle(v)}">
-            <div class="version-meta">
-              <span style="font-weight: 600; color: var(--primary); word-break: break-all;">\${escapeHtml(v.nome_arquivo)}</span>
-            </div>
-            <div class="version-meta">
-              <span class="version-time">\${timeStr}</span>
-              <div style="display: flex; gap: 8px;">
-                <span class="add">\${(v.cps || 0).toFixed(2)} c/s</span>
-                <span class="add">+\${v.adicoes} caracteres</span>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="flex: 1;">
+                <div class="version-meta">
+                  <span style="font-weight: 600; color: var(--primary); word-break: break-all;">\${escapeHtml(v.nome_arquivo)}</span>
+                </div>
+                <div class="version-meta">
+                  <span class="version-time">\${timeStr}</span>
+                  <div style="display: flex; gap: 8px;">
+                    <span class="add">\${(v.cps || 0).toFixed(2)} c/s</span>
+                    <span class="add">+\${v.adicoes} caracteres</span>
+                  </div>
+                </div>
               </div>
+              \${v.consecutiveSaves > 0 ? \`<div title="Saves consecutivos sem exclusão" style="background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; font-size: 11px; display: flex; align-items: center; gap: 4px; border: 1px solid var(--border); margin-left: 8px; color: var(--text-main);">🔥 \${v.consecutiveSaves}</div>\` : ''}
             </div>
           </div>
         \`;
@@ -726,10 +731,15 @@ export function generateDashboardHTML(data, meta) {
 
           sidebarHtml += \`
             <div class="version-item \${activeId === v.id ? 'active' : ''}" onclick="window.selectVersion('\${v.id}')" id="sb-\${v.id}" style="\${getBorderStyle(v)}">
-              <div class="version-meta">
-                <span class="version-time">\${timeStr} (\${dateStr})</span>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="flex: 1;">
+                  <div class="version-meta">
+                    <span class="version-time">\${timeStr} (\${dateStr})</span>
+                  </div>
+                  \${statsHtml}
+                </div>
+                \${v.consecutiveSaves > 0 ? \`<div title="Saves consecutivos sem exclusão" style="background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; font-size: 11px; display: flex; align-items: center; gap: 4px; border: 1px solid var(--border); margin-left: 8px; color: var(--text-main);">🔥 \${v.consecutiveSaves}</div>\` : ''}
               </div>
-              \${statsHtml}
             </div>
           \`;
         });
