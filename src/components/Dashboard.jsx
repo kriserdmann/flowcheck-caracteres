@@ -56,6 +56,18 @@ export function Dashboard({ data, onReset }) {
     }
   };
 
+  const getBorderStyle = (v) => {
+    const cps = v.cps || 0;
+    const adicoes = v.adicoes || 0;
+    
+    if (cps > 10 || adicoes > 300) {
+      return { border: '2px solid #ef4444' };
+    }
+    if (cps > 3 || adicoes > 50) {
+      return { border: '2px solid #eab308' };
+    }
+    return {};
+  };
 
   const activeId = activeVersion ? activeVersion.id : null;
 
@@ -151,6 +163,7 @@ export function Dashboard({ data, onReset }) {
                   key={`top_${v.id}`} 
                   className={`version-item top-item ${activeId === v.id ? 'active' : ''}`}
                   onClick={() => handleSelectVersion(v)}
+                  style={getBorderStyle(v)}
                 >
                   <div className="version-meta">
                     <span style={{fontWeight: 600, color: 'var(--primary)', wordBreak: 'break-all'}}>{v.nome_arquivo}</span>
@@ -178,6 +191,7 @@ export function Dashboard({ data, onReset }) {
                   key={`hist_${v.id}`}
                   className={`version-item ${activeId === v.id ? 'active' : ''}`}
                   onClick={() => handleSelectVersion(v)}
+                  style={getBorderStyle(v)}
                 >
                   <div className="version-meta">
                     <span className="version-time">{new Date(v.data).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'})} ({new Date(v.data).toLocaleDateString()})</span>

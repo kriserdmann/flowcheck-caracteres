@@ -679,6 +679,14 @@ export function generateDashboardHTML(data, meta) {
       });
     }
 
+    function getBorderStyle(v) {
+      const cps = v.cps || 0;
+      const adicoes = v.adicoes || 0;
+      if (cps > 10 || adicoes > 300) return 'border: 2px solid #ef4444;';
+      if (cps > 3 || adicoes > 50) return 'border: 2px solid #eab308;';
+      return '';
+    }
+
     // Render Sidebar
     let sidebarHtml = '';
 
@@ -688,7 +696,7 @@ export function generateDashboardHTML(data, meta) {
       top_5.forEach(v => {
         const timeStr = new Date(v.data).toLocaleTimeString();
         sidebarHtml += \`
-          <div class="version-item top-item \${activeId === v.id ? 'active' : ''}" onclick="window.selectVersion('\${v.id}')" id="sb-\${v.id}">
+          <div class="version-item top-item \${activeId === v.id ? 'active' : ''}" onclick="window.selectVersion('\${v.id}')" id="sb-\${v.id}" style="\${getBorderStyle(v)}">
             <div class="version-meta">
               <span style="font-weight: 600; color: var(--primary); word-break: break-all;">\${escapeHtml(v.nome_arquivo)}</span>
             </div>
@@ -717,7 +725,7 @@ export function generateDashboardHTML(data, meta) {
             : \`<div class="stats"><span style="color: var(--text-muted)">Criação Original</span></div>\`;
 
           sidebarHtml += \`
-            <div class="version-item \${activeId === v.id ? 'active' : ''}" onclick="window.selectVersion('\${v.id}')" id="sb-\${v.id}">
+            <div class="version-item \${activeId === v.id ? 'active' : ''}" onclick="window.selectVersion('\${v.id}')" id="sb-\${v.id}" style="\${getBorderStyle(v)}">
               <div class="version-meta">
                 <span class="version-time">\${timeStr} (\${dateStr})</span>
               </div>
