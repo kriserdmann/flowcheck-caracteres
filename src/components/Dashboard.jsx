@@ -157,7 +157,10 @@ export function Dashboard({ data, onReset }) {
                   </div>
                   <div className="version-meta">
                     <span className="version-time">{new Date(v.data).toLocaleTimeString()}</span>
-                    <span className="add">+{v.adicoes} caracteres</span>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <span className="add">{(v.cps || 0).toFixed(2)} c/s</span>
+                      <span className="add">+{v.adicoes} caracteres</span>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -181,6 +184,7 @@ export function Dashboard({ data, onReset }) {
                   </div>
                   {v.diff_content ? (
                     <div className="stats">
+                      <span className="add">{(v.cps || 0).toFixed(2)} c/s</span>
                       <span className="add">+{v.adicoes}</span>
                       <span className="rem">-{v.remocoes}</span>
                     </div>

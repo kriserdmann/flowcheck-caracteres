@@ -694,7 +694,10 @@ export function generateDashboardHTML(data, meta) {
             </div>
             <div class="version-meta">
               <span class="version-time">\${timeStr}</span>
-              <span class="add">+\${v.adicoes} caracteres</span>
+              <div style="display: flex; gap: 8px;">
+                <span class="add">\${(v.cps || 0).toFixed(2)} c/s</span>
+                <span class="add">+\${v.adicoes} caracteres</span>
+              </div>
             </div>
           </div>
         \`;
@@ -710,7 +713,7 @@ export function generateDashboardHTML(data, meta) {
           const timeStr = new Date(v.data).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
           const dateStr = new Date(v.data).toLocaleDateString();
           const statsHtml = v.diff_content 
-            ? \`<div class="stats"><span class="add">+\${v.adicoes}</span><span class="rem">-\${v.remocoes}</span></div>\`
+            ? \`<div class="stats"><span class="add">\${(v.cps || 0).toFixed(2)} c/s</span><span class="add">+\${v.adicoes}</span><span class="rem">-\${v.remocoes}</span></div>\`
             : \`<div class="stats"><span style="color: var(--text-muted)">Criação Original</span></div>\`;
 
           sidebarHtml += \`

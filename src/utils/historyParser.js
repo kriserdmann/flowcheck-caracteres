@@ -371,10 +371,14 @@ export const processFilesMap = (filesMap) => {
             if (adicoes === 0 && remocoes === 0) {
                 continue;
             }
+            
+            const tempo_segundos = (v.data.getTime() - lastKept.data.getTime()) / 1000;
+            v.cps = tempo_segundos > 0 ? (adicoes / tempo_segundos) : 0;
         } else {
             v.diff_content = null;
             v.adicoes = 0;
             v.remocoes = 0;
+            v.cps = 0;
         }
 
         finalVersoes.push(v);
