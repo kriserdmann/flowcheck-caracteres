@@ -4,11 +4,13 @@ O **FlowCheck** é uma ferramenta de auditoria e métrica de código projetada e
 
 Em sua versão mais recente (Local Analyzer), o projeto é um ambiente **100% Client-Side e Serverless**, focado inteiramente na privacidade. Nenhum código de aluno, arquivo sensível ou histórico trafega para servidores externos ou banco de dados.
 
+
 ## 🚀 Como Funciona
 
 Em vez de depender de integrações complexas do Git, o aplicativo aproveita os arquivos de backup gerados automaticamente por extensões editoriais comuns (como a pasta oculta **`.history`** frequentemente presente em workspaces modernos). O professor ou avaliador simplesmente arrasta a pasta inteira ou o `.zip` do projeto para dentro do Dashboard.
 
 Em frações de segundo, todos os arquivos são vasculhados e o aplicativo reconstrói **exatamente** o que o aluno digitou, apagou, e quando o fez, rankeando o nível de esforço intelectual.
+
 
 ## 🌟 Principais Funcionalidades
 
