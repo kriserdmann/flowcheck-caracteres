@@ -355,8 +355,8 @@ export const processFilesMap = (filesMap) => {
             v.diff_content = diffArray;
             
             // Calculate exact character differences for stats, ignoring whitespace
-            const clean1 = lines1.replace(/\\s/g, '');
-            const clean2 = lines2.replace(/\\s/g, '');
+            const clean1 = lines1.replace(/\s/g, '');
+            const clean2 = lines2.replace(/\s/g, '');
             const charDiff = Diff.diffChars(clean1, clean2);
             
             charDiff.forEach(part => {
